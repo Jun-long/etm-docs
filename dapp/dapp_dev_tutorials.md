@@ -317,8 +317,8 @@ module.exports = {
 
 ### 4.2 自定义用户合约
 
-这一步里面主要用到的文档是：https://github.com/entanmo/etm/blob/master/docs/etm_sdk_api.md
-app.xxx这种接口都来自etm_vm
+这一步里面主要用到的文档是：https://github.com/etm-developer/etm-docs/blob/master/dapp/dapp-sdk-api.md
+app.xxx这种接口都来自etm_vm (https://github.com/entanmo/etm_vm)
 
 合约就是业务逻辑处理。
 

@@ -120,7 +120,7 @@ JSON返回示例：
   
 |名称	|类型   |必填 |说明              |   
 |------ |-----  |---  |----              |   
-|address |string | Y   |asch地址    |   
+|address |string | Y   |etm地址    |   
   
 返回参数说明：   
 
@@ -161,14 +161,14 @@ http接口又分为signed和unsigned，他们的区别是交易在本地还是�
  - key为magic，testnet value:594fe0f3, mainnet value:5f5b3cf5  
  - key为version，value为'' 
 
-asch系统的所有写操作都是通过发起一个交易来完成的。    
-交易数据通过一个叫做asch-js的库来创建，然后再通过一个POST接口发布出去。    
+etm系统的所有写操作都是通过发起一个交易来完成的。    
+交易数据通过一个叫做etm-js的库来创建，然后再通过一个POST接口发布出去。    
 POST接口规格如下：
 
 |事项   |说明  |
 |---    |---   |
 |接口地址|/peer/transactions  |
-|payload|asch-js创建出来的交易数据  |
+|payload|etm-js创建出来的交易数据  |
 |请求方式|post/put等 |
 |支持格式|json |
   
@@ -181,7 +181,7 @@ POST接口规格如下：
 
 |名称	|类型   |必填 |说明              |
 |------ |-----  |---  |----              |   
-|transaction|json|Y|aschJS.transfer.createInTransfer生成的交易数据|
+|transaction|json|Y|etmJS.transfer.createInTransfer生成的交易数据|
 
   
 返回参数说明：   
@@ -193,18 +193,18 @@ POST接口规格如下：
   
 请求示例：   
 ```bash   
-var aschJS = require('asch-js');    
+var etmJS = require('etm-js');    
 var dappid = "bebe3c57d76a5bbe3954bd7cb4b9e381e8a1ba3c78e183478b4f98b9d532f024";  
 var currency = "XAS";  
 var amount = 10*100000000 ;  
 var secret = "found knife gather faith wrestle private various fame cover response security predict";  
 var secondSecret = "";
-var transaction = aschJS.transfer.createInTransfer(dappid, currency, amount, secret, secondSecret || undefined);  
+var transaction = etmJS.transfer.createInTransfer(dappid, currency, amount, secret, secondSecret || undefined);  
  
 console.log(JSON.stringify(transaction));    
 {"type":6,"amount":1000000000,"fee":10000000,"recipientId":null,"senderPublicKey":"2856bdb3ed4c9b34fd2bba277ffd063a00f703113224c88c076c0c58310dbec4","timestamp":39721503,"asset":{"inTransfer":{"dappId":"bebe3c57d76a5bbe3954bd7cb4b9e381e8a1ba3c78e183478b4f98b9d532f024","currency":"XAS"}},"signature":"8cefc8fa933e4d5e8699828dc8cd5d1b4737ffa82175c744fd681bad0b1a6b68526e0783e85d7979f894fc38850bd2ed0a983ce3cb3f5d16b68fd37dfb9dfb0a","id":"4b580f8f61f4586920a4c0d37b6fad21daf3453fe9ccc5426c2cae7a263c160c"}  // type=6表示dapp充值,这里的type指主链的交易类型，非dapp合约编号  
 
-// 将上面生成的“充值”交易数据通过post提交给asch server
+// 将上面生成的“充值”交易数据通过post提交给etm server
 curl -H "Content-Type: application/json" -H "magic:594fe0f3" -H "version:''" -k -X POST -d '{"transaction":{"type":6,"amount":1000000000,"fee":10000000,"recipientId":null,"senderPublicKey":"2856bdb3ed4c9b34fd2bba277ffd063a00f703113224c88c076c0c58310dbec4","timestamp":39721503,"asset":{"inTransfer":{"dappId":"bebe3c57d76a5bbe3954bd7cb4b9e381e8a1ba3c78e183478b4f98b9d532f024","currency":"XAS"}},"signature":"8cefc8fa933e4d5e8699828dc8cd5d1b4737ffa82175c744fd681bad0b1a6b68526e0783e85d7979f894fc38850bd2ed0a983ce3cb3f5d16b68fd37dfb9dfb0a","id":"4b580f8f61f4586920a4c0d37b6fad21daf3453fe9ccc5426c2cae7a263c160c"}}' http://localhost:4096/peer/transactions && echo    
 
 ```   
@@ -226,7 +226,7 @@ JSON返回示例：
 |名称	|类型   |必填 |说明              |   
 |------ |-----  |---  |----              |   
 |dappID|string|Y|dapp的id  |
-|transaction|json|Y|aschJS.dapp.createInnerTransaction生成的交易数据|  
+|transaction|json|Y|etmJS.dapp.createInnerTransaction生成的交易数据|  
 
   
 返回参数说明：   
@@ -238,17 +238,17 @@ JSON返回示例：
   
 请求示例：   
 ```bash   
-var aschJS = require('asch-js');   
+var etmJS = require('etm-js');   
 var fee = String(0.1 * 100000000);  
 var type = 2;  
 var options = {fee: fee, type: type, args: '["CCTime.XCT", "100000000"]'};  
 var secret = "elite brush pave enable history risk ankle shrimp debate witness ski trend";  
-var transaction = aschJS.dapp.createInnerTransaction(options, secret);  
+var transaction = etmJS.dapp.createInnerTransaction(options, secret);  
  
 console.log(JSON.stringify(transaction));    
 {"fee":"10000000","timestamp":40384202,"senderPublicKey":"aa4e4ac1336a1e9db1ee5ce537a59d3fcb0f068cb4b25aac9f48e0e8bc6259c9","type":2,"args":"[\"CCTime.XCT\", \"100000000\"]","signature":"05dba744705fd1dbc1854b415392364cdbae11778671be8eb5fdbce57855a87b3dde5bf2d0219059411253fb304497758422c8d1546ec45eb5521b4a6577d507"}
 
-// 将上面生成的“提现”交易数据通过post提交给asch server  
+// 将上面生成的“提现”交易数据通过post提交给etm server  
 curl -H "Content-Type: application/json" -H "magic:594fe0f3" -H "version:''" -k -X PUT -d '{"transaction":{"fee":"10000000","timestamp":40384202,"senderPublicKey":"aa4e4ac1336a1e9db1ee5ce537a59d3fcb0f068cb4b25aac9f48e0e8bc6259c9","type":2,"args":"[\"CCTime.XCT\", \"100000000\"]","signature":"05dba744705fd1dbc1854b415392364cdbae11778671be8eb5fdbce57855a87b3dde5bf2d0219059411253fb304497758422c8d1546ec45eb5521b4a6577d507"}}' http://45.32.22.78:4096/api/dapps/d352263c517195a8b612260971c7af869edca305bb64b471686323817e57b2c1/transactions/signed && echo    
 
 ```   
@@ -270,7 +270,7 @@ JSON返回示例：
 |名称	|类型   |必填 |说明              |   
 |------ |-----  |---  |----              |   
 |dappID|string|Y|dapp的id  |
-|transaction|json|Y|aschJS.dapp.createInnerTransaction生成的交易数据|  
+|transaction|json|Y|etmJS.dapp.createInnerTransaction生成的交易数据|  
 
   
 返回参数说明：   
@@ -282,17 +282,17 @@ JSON返回示例：
   
 请求示例：   
 ```bash   
-var aschJS = require('asch-js');   
+var etmJS = require('etm-js');   
 var fee = String(0.1 * 100000000);  
 var type = 3;  
 var options = {fee: fee, type: type, args: '["CCTime.XCT", "100000000", "A6H9rawJ7qvE2rKwQfdtBHdeYVehB8gFzC"]'};  
 var secret = "elite brush pave enable history risk ankle shrimp debate witness ski trend";  
-var transaction = aschJS.dapp.createInnerTransaction(options, secret);  
+var transaction = etmJS.dapp.createInnerTransaction(options, secret);  
  
 console.log(JSON.stringify(transaction));    
 {"fee":"10000000","timestamp":40387708,"senderPublicKey":"aa4e4ac1336a1e9db1ee5ce537a59d3fcb0f068cb4b25aac9f48e0e8bc6259c9","type":3,"args":"[\"CCTime.XCT\", \"100000000\", \"A6H9rawJ7qvE2rKwQfdtBHdeYVehB8gFzC\"]","signature":"e2364534b8c4b0735a85c68ba17fddf5321fc48af04d483ad05531d4993058eaa35ff44d913a03b6d7278890ff7f42435f8313e08ce70c523dfc256b4de9e303"}  
 
-// 将上面生成的“提现”交易数据通过post提交给asch server  
+// 将上面生成的“提现”交易数据通过post提交给etm server  
 curl -H "Content-Type: application/json" -H "magic:594fe0f3" -H "version:''" -k -X PUT -d '{"transaction":{"fee":"10000000","timestamp":40387708,"senderPublicKey":"aa4e4ac1336a1e9db1ee5ce537a59d3fcb0f068cb4b25aac9f48e0e8bc6259c9","type":3,"args":"[\"CCTime.XCT\", \"100000000\", \"A6H9rawJ7qvE2rKwQfdtBHdeYVehB8gFzC\"]","signature":"e2364534b8c4b0735a85c68ba17fddf5321fc48af04d483ad05531d4993058eaa35ff44d913a03b6d7278890ff7f42435f8313e08ce70c523dfc256b4de9e303"}}'  http://45.32.22.78:4096/api/dapps/d352263c517195a8b612260971c7af869edca305bb64b471686323817e57b2c1/transactions/signed && echo    
 
 ```   
@@ -314,7 +314,7 @@ JSON返回示例：
 |名称	|类型   |必填 |说明              |   
 |------ |-----  |---  |----              |   
 |dappID|string|Y|dapp的id  |
-|transaction|json|Y|aschJS.dapp.createInnerTransaction生成的交易数据|  
+|transaction|json|Y|etmJS.dapp.createInnerTransaction生成的交易数据|  
 
   
 返回参数说明：   
@@ -326,17 +326,17 @@ JSON返回示例：
   
 请求示例：   
 ```bash   
-var aschJS = require('asch-js');   
+var etmJS = require('etm-js');   
 var fee = String(0.1 * 100000000);  
 var type = 4;  
 var options = {fee: fee, type: type, args: '["Nickname"]'};  // Nickname即昵称
 var secret = "elite brush pave enable history risk ankle shrimp debate witness ski trend";  
-var transaction = aschJS.dapp.createInnerTransaction(options, secret);  
+var transaction = etmJS.dapp.createInnerTransaction(options, secret);  
  
 console.log(JSON.stringify(transaction));    
 {"fee":"10000000","timestamp":40388287,"senderPublicKey":"aa4e4ac1336a1e9db1ee5ce537a59d3fcb0f068cb4b25aac9f48e0e8bc6259c9","type":4,"args":"[\"Nickname\"]","signature":"be08cdb2f4d1a0f2f2e5b02e33e67fdf43e403703ce35cb42a2dc7338c7a352adca56dc61e3be0fedc1727c1adc0101f1a9e1a3e67ac0623602bf872deb80802"}
 
-// 将上面生成的“提现”交易数据通过post提交给asch server  
+// 将上面生成的“提现”交易数据通过post提交给etm server  
 curl -H "Content-Type: application/json" -H "magic:594fe0f3" -H "version:''" -k -X PUT -d '{"transaction":{"fee":"10000000","timestamp":40388287,"senderPublicKey":"aa4e4ac1336a1e9db1ee5ce537a59d3fcb0f068cb4b25aac9f48e0e8bc6259c9","type":4,"args":"[\"Nickname\"]","signature":"be08cdb2f4d1a0f2f2e5b02e33e67fdf43e403703ce35cb42a2dc7338c7a352adca56dc61e3be0fedc1727c1adc0101f1a9e1a3e67ac0623602bf872deb80802"}}' http://45.32.22.78:4096/api/dapps/d352263c517195a8b612260971c7af869edca305bb64b471686323817e57b2c1/transactions/signed && echo    
 
 ```   
@@ -359,7 +359,7 @@ JSON返回示例：
   
 |名称	|类型   |必填 |说明              |   
 |------ |-----  |---  |----              |   
-|secret|string|Y|asch密码 |  
+|secret|string|Y|etm密码 |  
 |fee|string|Y|交易手续费,目前固定为10000000  |  
 |type|integer|Y|智能合约编号 |  
 |args|json字符串数组|Y|对应合约编号需要传入的参数 |
@@ -394,7 +394,7 @@ JSON返回示例：
   
 |名称	|类型   |必填 |说明              |   
 |------ |-----  |---  |----              |   
-|secret|string|Y|asch密码 |  
+|secret|string|Y|etm密码 |  
 |fee|string|Y|交易手续费,目前固定为10000000  |  
 |type|integer|Y|智能合约编号 |  
 |args|json字符串数组|Y|对应合约编号需要传入的参数 |
@@ -429,7 +429,7 @@ JSON返回示例：
   
 |名称	|类型   |必填 |说明              |   
 |------ |-----  |---  |----              |   
-|secret|string|Y|asch密码 |  
+|secret|string|Y|etm密码 |  
 |fee|string|Y|交易手续费,目前固定为10000000  |  
 |type|integer|Y|智能合约编号 |  
 |args|json字符串数组|Y|对应合约编号需要传入的参数，这里是昵称 |

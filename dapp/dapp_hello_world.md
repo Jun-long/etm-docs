@@ -18,7 +18,7 @@ Dapp的开发同样要涉及到这三种网络，即
 
 ## 2 启动localnet
 
-每个开发者都可以在本地启动自己的localnet，需要先下载[asch源码](https://github.com/entanmo/etm)。
+每个开发者都可以在本地启动自己的localnet，需要先下载[etm源码](https://github.com/entanmo/etm)。
 
 ```
 > git clone https://github.com/entanmo/etm.git
@@ -139,7 +139,7 @@ DApp meta information is saved to ./dapp.json ...
     publicKey: '74db8511d0021206abfdc993a97312e3eb7f8595b8bc855d87b0dc764cdfa5a8' } ]
 Done
 
-// 在http://127.0.0.1:4096用localnet的创世账户“someone manual strong movie roof episode eight spatial brown soldier soup motor”登陆（该账户中有初始发行的1亿xas token），然后给A8QCwz5Vs77UGX9YqBg9kJ6AZmsXQBC8vj地址转10000个xas
+// 在http://127.0.0.1:4096  用创世账户“someone manual strong movie roof episode eight spatial brown soldier soup motor”登陆（该账户中有初始发行的1亿xas token），然后给A8QCwz5Vs77UGX9YqBg9kJ6AZmsXQBC8vj地址转10000个xas
 
 > etm-cli registerdapp -f dapp.json -e "possible melt adapt spoon wing coyote found flower bitter warm tennis easily"
 # 返回结果如下,这就是应用id。每个应用注册时返回的id不同，请记下你自己的应用id

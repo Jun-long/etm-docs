@@ -1,7 +1,7 @@
 Table of Contents
 =================
 
-   * [Asch SDK API 使用说明](#etm-sdk-api-使用说明)
+   * [etm SDK API 使用说明](#etm-sdk-api-使用说明)
       * [<strong>1. 数据库</strong>](#1-数据库)
          * [1.1 aync app.sdb.load(model, fields, indices)](#11-aync-appsdbloadmodel-fields-indices)
          * [1.2 app.sdb.get(model, cond)](#12-appsdbgetmodel-cond)
@@ -56,7 +56,7 @@ Table of Contents
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
 
-# Asch SDK API 使用说明
+# etm SDK API 使用说明
 
 
 ## **1. 数据库**
@@ -600,7 +600,7 @@ app.setDefaultFee('10000', 'XAS')
 - `epochTime` 距离创世区块生成时间的秒数
 
 > 返回完整的时间戳, 即区块创世时间加上偏移量, 单位为毫秒
-> Asch系统中底层存储和上层查询的时间戳均为一个偏移量, 并非实际时间戳, 可以调用这个函数转换为真实的时间戳
+> etm系统中底层存储和上层查询的时间戳均为一个偏移量, 并非实际时间戳, 可以调用这个函数转换为真实的时间戳
 
 示例:
 
