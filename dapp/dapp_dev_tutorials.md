@@ -81,7 +81,7 @@ cd etm && node app.js // 日志打印到屏幕终端，ctrl+c结束进程
 cd  etm-wallet  && npm run dev
 
 ```
-然后在浏览器中打开 ```http://localhost:8080```，如果能看到etm钱包登陆页面说明localnet的搭建和启动成功（localnet的创世账户密码："someone manual strong movie roof episode eight spatial brown soldier soup motor"，里面有一亿XAS）。如果页面报错，则需要检查app.js进程是否存在、日志报错信息等。
+然后在浏览器中打开 ```http://localhost:8080```，如果能看到etm钱包登陆页面说明localnet的搭建和启动成功（localnet的创世账户密码："someone manual strong movie roof episode eight spatial brown soldier soup motor"，里面有一亿ETM）。如果页面报错，则需要检查app.js进程是否存在、日志报错信息等。
 
 
 ## 3.注册并启动第一个DAPP
@@ -133,7 +133,7 @@ e1fe3f445a8aaecc9
 DApp meta information is saved to ./dapp.json ...
 ? Enter master secret of your genesis account [hidden] //这里输入的密码为：'almost journey future similar begin type write celery girl month forget breeze'
 ? Do you want publish a inbuilt asset in this dapp? Yes
-? Enter asset name, for example: BTC, CNY, USD, MYASSET XCT
+? Enter asset name, for example: BTC, CNY, USD, MYASSET ETM
 ? Enter asset total amount 100000000
 ? Enter asset precision 8
 New genesis block is created at: ./genesis.json
