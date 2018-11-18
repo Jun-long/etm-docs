@@ -1,6 +1,6 @@
 # etm DAPP核心开发流程解析
 
-标签（空格分隔）： etm DAPP
+标签： etm DAPP
 
 ---
 
@@ -96,21 +96,21 @@ etm作为一个区块链开发平台，为开发者提供了一个安全且高�
 // 生成5个受托人账号
 dev@MiAir:~/Codes/github/entanmo/etm$ etm-cli crypto -g
 ? Enter number of accounts to generate 5
-[ { address: 'A9pDhjc7NuYMWYLxkgAgVmHE2NQ7diMcWX',
-    secret: 'fit night someone unveil dwarf believe middle evidence puzzle hotel common choose',
-    publicKey: 'afdf69f0da9ff333218f2cd10cb0a907c2e76788f752b799cb1dab3a9f03bf63' },
-  { address: 'A2jvQUNowLgP9hHMN3tSCAUkakuigGRytB',
-    secret: 'lawsuit ride civil slice kitchen unfold unable lumber prevent suspect finger chunk',
-    publicKey: '67d52a0265f9e5366660c8b384cee56d3f8b5737b2dd3c617d22df83b5ebef02' },
-  { address: 'A7JjHgx7ACCJ6AxypBn4Qt9NrGaY4JuZDF',
-    secret: 'absurd sweet blast dinner battle zero ladder steak coral fork venture coffee',
-    publicKey: '39c2322600a0c81ecfa97119ec8e2d5bfb73394914d92b54e961846a987e4e22' },
-  { address: 'AMu7kuP9TjywkUQQQgALid96So2VCve5QB',
-    secret: 'topic ramp throw cloud moment jungle bar series task protect erupt answer',
-    publicKey: '4740d2c16bf6c5a174eba1e0f859253a64851d30acbc9655b01394af82d3e325' },
-  { address: 'A9BzaJDkyzb9RVAFjsePMemSVXMDLiQpjJ',
-    secret: 'shoot tired know dish rally kiwi snack patrol bunker ocean panel this',
-    publicKey: 'b433c226645981477642491f77de7b8d63274aa51f932bbe1fe3f445a8aaecc9' } ]
+[ { address: 'AuEdrfkMbqdRjAsT8FYGw8udiG8hy31Rv',
+    secret: 'team owner subway scatter entry boss crucial wave bonus alert girl hub',
+    publicKey: '432aa7e9c8c27c455ef1ce2c1c86218a7a17874718967b513afaceb08d2b939c' },
+  { address: 'A99gBroy9wPDXiretHEhYK8jZzc3FnfyCx',
+    secret: 'couch slice income patient filter double coconut talk accuse actor crime gather',
+    publicKey: '11f5f8c23e9692701d1ec2ff11ad32dbe4b6381b4031b91377a15945ec247cbf' },
+  { address: 'AVFG3cUaLcNsuToAQNVSSb5T8RTnQDEWX',
+    secret: 'venue bonus spot capital icon broken bicycle seven length curtain onion art',
+    publicKey: '587985e21512a902fb54038c0e4fae54b158cd124d68e4c51de4a12af34092d4' },
+  { address: 'AK38dzmez1MHUNU9rmwxuvpDvTMWHCwac2',
+    secret: 'record claw annual eyebrow card wash bridge admit seed divorce arrange zone',
+    publicKey: 'f2e6d0ef383f9d9107830586ba8bdf901a472fc6a6ecd6a4c610e6c916bde53e' },
+  { address: 'A9X6RaEP5qXKcwdaRXdfc3UFNMzrF5weaz',
+    secret: 'scorpion view record alpha unit scorpion apple shine horn cube opera sick',
+    publicKey: '0fd0e8ab19c4f2f3fef98208c16c6709073491d470d3e0e9f32f1081e86d29e2' } ]
 Done
 ```
 
@@ -140,6 +140,11 @@ New genesis block is created at: ./genesis.json
 // 生成的文件如下
 dev@MiAir:~/Codes/github/entanmo/etm/dapps/hello-dapp$ ls
 config.json  contract  dapp.json  genesis.json  init.js  interface  model  public
+
+需要修改 config.json， 将上面产生的5 个账号的secret 填入到config.json 的 secrets 里边
+一般选择奇数个delegates， 同时 unlock 的账号数为超过一半以上的delegates数。 如果多个节点部署， 则将 secrets 分布到多个config.json 里边，
+同时，peers 里边， 需要把其他节点的 ip， port 填入， 从而实现多个节点分布部署
+
 ```
 
 #### 3.1.2 注册DAPP到localnet上
@@ -194,11 +199,11 @@ mv hello-dapp 75d084dc91221b380e7a3c6b3b7467935572b4ebaa1e9a3db91e1239377c1fed
 ```
 {
         "secrets": [
-          "fit night someone unveil dwarf believe middle evidence puzzle hotel common choose",
-          "lawsuit ride civil slice kitchen unfold unable lumber prevent suspect finger chunk",
-          "absurd sweet blast dinner battle zero ladder steak coral fork venture coffee",
-          "topic ramp throw cloud moment jungle bar series task protect erupt answer",
-          "hoot tired know dish rally kiwi snack patrol bunker ocean panel this"
+          "team owner subway scatter entry boss crucial wave bonus alert girl hub",
+          "couch slice income patient filter double coconut talk accuse actor crime gather",
+          "venue bonus spot capital icon broken bicycle seven length curtain onion art",
+          "record claw annual eyebrow card wash bridge admit seed divorce arrange zone",
+          "scorpion view record alpha unit scorpion apple shine horn cube opera sick"
         ]
 }
 ```
@@ -461,14 +466,13 @@ app.route.get('/articles', async (req) => {
   })
 ```
 
-4.4 测试
-重启etm服务。
+### 4.4 开发侧链的web应用
+  前面的这些，对于侧链的使用者， 几乎是无感知的。 用户要使用侧链，需要开发者同时开发客户端应用。 客户端的应用，可以有多种形式， 可以是
+基于B/S 模式的，也就是开发web应用，在web应用里边调用dapp 的服务。 也可以开发移动端或者桌面端的应用，在应用里边调用dapp 的服务。
 
+### 4.5 测试验证dapp 服务端和客户端
 
-未完待续
-
-
-
+### 4.6 发布dapp 到主链
 
 
 
