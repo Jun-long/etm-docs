@@ -676,6 +676,6 @@ JSON返回示例：
 ```
 
 ## **5 参考资料**
-  下面这个连接提供了dapp样例程序，当开发dapp http 接口遇到困难的时候，可以参考这个样例
+  下面这个连接提供了dapp样例程序，当开发dapp http 接口遇到困难的时候，可以参考这个样例 <br /> 
   [dapp http demo](https://github.com/etm-developer/trans-api-demo)
 
