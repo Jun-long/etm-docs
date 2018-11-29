@@ -10,5 +10,6 @@
 - [hello world dapp 开发](./dapp/dapp_hello_world.md)
 - [dapp http 接口](./dapp/dapp_http_api.md)
 - [dapp sdk api](./dapp/dapp-sdk-api.md)
+- [dapp开发问题howto](./dapp/dapp_dev_problems.md)
 
 
